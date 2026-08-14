@@ -77,5 +77,34 @@ list navigation-menu (
         }
     )
 
-)
+    entry menu (
+        label: Menu
+        icon {
+            imageIconCssClasses: fa-list
+        }
+        layout {
+            sequence: 20
+        }
+        link {
+            target: {
+                page: 2
+            }
+        }
+    )
 
+    entry contact (
+        label: Contact
+        icon {
+            imageIconCssClasses: fa-envelope
+        }
+        layout {
+            sequence: 30
+        }
+        link {
+            target: {
+                page: 3
+            }
+        }
+    )
+
+)

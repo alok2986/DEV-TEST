@@ -2,7 +2,7 @@ app DEV-TEST (
     name: DEV-TEST
     logo {
         type: text
-        text: DEV-TEST
+        text: Dev Restaurant
     }
     navigation {
         homeUrl: {
@@ -51,9 +51,9 @@ app DEV-TEST (
 
     substitution APP_NAME (
         value {
-            staticValue: DEV-TEST
+            staticValue: Dev Restaurant
         }
     )
 
 )
-
+    

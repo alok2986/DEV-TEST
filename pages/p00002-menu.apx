@@ -1,0 +1,43 @@
+page 2 (
+    name: Menu
+    alias: MENU
+    title: Menu
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region menu-items (
+        name: Menu Items
+        title: Menu Items
+        type: interactiveReport
+        source {
+            location: localDatabase
+            type: sqlQuery
+            sqlQuery: ```
+            select item_name    as "Item Name",
+                   category     as "Category",
+                   price        as "Price",
+                   availability as "Availability"
+              from dev_menu_items
+             order by category, item_name
+            ```
+        }
+        layout {
+            sequence: 10
+            slot: body
+        }
+        appearance {
+            template: @/interactive-report
+            templateOptions: #DEFAULT#
+        }
+    )
+
+)

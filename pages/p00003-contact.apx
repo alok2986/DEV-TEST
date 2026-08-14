@@ -1,0 +1,184 @@
+page 3 (
+    name: Contact
+    alias: CONTACT
+    title: Contact
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region restaurant-information (
+        name: Restaurant Information
+        title: Restaurant Information
+        type: staticContent
+        source {
+            htmlCode: ```
+            <dl>
+                <dt>Restaurant Name</dt>
+                <dd>Dev Restaurant</dd>
+                <dt>Address</dt>
+                <dd>123 Dev Street, Code City</dd>
+                <dt>Phone</dt>
+                <dd>+1 555-0100</dd>
+                <dt>Email</dt>
+                <dd>contact@devrestaurant.example</dd>
+                <dt>Working Hours</dt>
+                <dd>Monday to Sunday, 10:00 AM - 10:00 PM</dd>
+            </dl>
+            ```
+        }
+        layout {
+            sequence: 10
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region contact-form (
+        name: Contact Form
+        title: Contact Form
+        type: staticContent
+        layout {
+            sequence: 20
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    pageItem P3_CUSTOMER_NAME (
+        type: textField
+        label {
+            label: Customer Name
+            alignment: above
+        }
+        layout {
+            sequence: 10
+            region: @contact-form
+            slot: body
+        }
+        validation {
+            valueRequired: true
+            maxLength: 100
+        }
+    )
+
+    pageItem P3_EMAIL (
+        type: textField
+        label {
+            label: Email
+            alignment: above
+        }
+        layout {
+            sequence: 20
+            region: @contact-form
+            slot: body
+        }
+        validation {
+            maxLength: 255
+        }
+    )
+
+    pageItem P3_PHONE (
+        type: textField
+        label {
+            label: Phone
+            alignment: above
+        }
+        layout {
+            sequence: 30
+            region: @contact-form
+            slot: body
+        }
+        validation {
+            maxLength: 30
+        }
+    )
+
+    pageItem P3_MESSAGE (
+        type: textarea
+        label {
+            label: Message
+            alignment: above
+        }
+        layout {
+            sequence: 40
+            region: @contact-form
+            slot: body
+        }
+        appearance {
+            height: 5
+        }
+        validation {
+            maxLength: 4000
+        }
+    )
+
+    button submit (
+        buttonName: SUBMIT
+        label: Submit
+        layout {
+            sequence: 50
+            region: @contact-form
+            slot: body
+        }
+        appearance {
+            buttonTemplate: @/text
+            hot: true
+            templateOptions: #DEFAULT#
+        }
+        behavior {
+            type: standard
+            action: submitPage
+            executeValidations: true
+            showProcessing: true
+        }
+    )
+
+    process save-contact-message (
+        name: Save Contact Message
+        type: executeCode
+        source {
+            location: localDatabase
+            language: plsql
+            plsqlCode: ```
+            insert into dev_contact_messages (
+                customer_name,
+                email,
+                phone,
+                message
+            ) values (
+                :P3_CUSTOMER_NAME,
+                :P3_EMAIL,
+                :P3_PHONE,
+                :P3_MESSAGE
+            );
+            ```
+        }
+        execution {
+            sequence: 10
+            point: afterSubmit
+        }
+        successMessage {
+            successMessage: ```
+            Thank you for contacting Dev Restaurant.
+            ```
+        }
+        serverSideCondition {
+            whenButtonPressed: @submit
+        }
+    )
+
+)

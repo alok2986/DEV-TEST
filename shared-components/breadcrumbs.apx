@@ -14,5 +14,30 @@ breadcrumb breadcrumb (
         }
     )
 
-)
+    entry menu (
+        name: Menu
+        pageNumber: 2
+        execution {
+            sequence: 20
+        }
+        link {
+            target: {
+                page: 2
+            }
+        }
+    )
 
+    entry contact (
+        name: Contact
+        pageNumber: 3
+        execution {
+            sequence: 30
+        }
+        link {
+            target: {
+                page: 3
+            }
+        }
+    )
+
+)

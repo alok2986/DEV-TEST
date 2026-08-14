@@ -1,7 +1,7 @@
 page 1 (
     name: Home
     alias: HOME
-    title: DEV-TEST
+    title: Home
     appearance {
         pageTemplate: @/standard
         templateOptions: #DEFAULT#
@@ -14,9 +14,16 @@ page 1 (
         formAutoComplete: false
     }
 
-    region dev-test (
-        name: DEV-TEST
+    region hero-banner (
+        name: Hero Banner
+        title: Welcome to Dev Restaurant
         type: staticContent
+        source {
+            htmlCode: ```
+            <p><strong>Fresh Food. Fast Delivery. Quality Ingredients.</strong></p>
+            <p>We serve delicious meals with dine-in, takeaway and catering services.</p>
+            ```
+        }
         layout {
             sequence: 10
             slot: breadcrumbBar
@@ -25,10 +32,64 @@ page 1 (
             template: @/hero
             templateOptions: #DEFAULT#
         }
-        image {
-            fileUrl: #APP_FILES#icons/app-icon-512.png
+    )
+
+    region our-services (
+        name: Our Services
+        title: Our Services
+        type: staticContent
+        layout {
+            sequence: 20
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region dine-in (
+        name: Dine In
+        type: staticContent
+        layout {
+            sequence: 30
+            parentRegion: @our-services
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region take-away (
+        name: Take Away
+        type: staticContent
+        layout {
+            sequence: 40
+            parentRegion: @our-services
+            slot: body
+            startNewRow: false
+        }
+        appearance {
+            template: @/standard
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region catering (
+        name: Catering
+        type: staticContent
+        layout {
+            sequence: 50
+            parentRegion: @our-services
+            slot: body
+            startNewRow: false
+        }
+        appearance {
+            template: @/standard
+            templateOptions: #DEFAULT#
         }
     )
 
 )
-
