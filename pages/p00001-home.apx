@@ -54,7 +54,7 @@ page 1 (
         layout {
             sequence: 30
             parentRegion: @our-services
-            slot: body
+            slot: subRegions
         }
         appearance {
             template: @/standard
@@ -68,7 +68,7 @@ page 1 (
         layout {
             sequence: 40
             parentRegion: @our-services
-            slot: body
+            slot: subRegions
             startNewRow: false
         }
         appearance {
@@ -83,7 +83,7 @@ page 1 (
         layout {
             sequence: 50
             parentRegion: @our-services
-            slot: body
+            slot: subRegions
             startNewRow: false
         }
         appearance {
